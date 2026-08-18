@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>成长社 · 共读共写共创</title>
+<style>
+:root{
+  --cream:#FDFBF7;--cream-2:#F7F4ED;--cream-3:#EFEBE2;--white:#FFFFFF;
+  --text:#2A2A2A;--text-2:#5A5A5A;--text-3:#8A8A8A;--text-4:#B0B0B0;
+  --border:#EDE9E0;--border-2:#E5E0D5;--accent:#C2884E;--accent-2:#A06D3D;
+  --pink:#E8D5D5;--blue:#C5D5E8;--green:#C5D8C5;--purple:#D5C5E0;
+  --yellow:#E8E0C5;--orange:#E8D0B8;
+  --shadow:0 2px 8px rgba(60,50,30,0.06),0 8px 24px rgba(60,50,30,0.05);
+  --shadow-hover:0 4px 16px rgba(60,50,30,0.1),0 12px 32px rgba(60,50,30,0.08);
+  --r:20px;--r-sm:14px;--r-xs:10px;--r-pill:999px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-serif:"Noto Serif SC","Songti SC",Georgia,serif;
+}
+[data-theme="dark"]{
+  --cream:#1A1814;--cream-2:#232019;--cream-3:#2C2820;--white:#2A2620;
+  --text:#F5F1E8;--text-2:#C8C2B6;--text-3:#9A958A;--text-4:#6E6A60;
+  --border:#3A352C;--border-2:#454035;--accent:#D4A06A;--accent-2:#E8B880;
+  --pink:#5A4040;--blue:#3A4A5A;--green:#3A4A3A;--purple:#4A3A52;
+  --yellow:#4A4530;--orange:#4A3A2A;
+  --shadow:0 2px 8px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.25);
+  --shadow-hover:0 4px 16px rgba(0,0,0,0.3),0 12px 32px rgba(0,0,0,0.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);background:var(--cream);line-height:1.55;letter-spacing:-0.005em;transition:background .3s,color .3s;}
+a{color:inherit;text-decoration:none;}
+button,input,select,textarea{font-family:inherit;color:inherit;}
+
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:84px;background:var(--cream-2);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:24px 0;z-index:100;}
+.logo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#34c759);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:28px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.nav-items{display:flex;flex-direction:column;gap:10px;width:100%;align-items:center;}
+.nav-item{width:54px;height:54px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-3);cursor:pointer;transition:all .2s;}
+.nav-item:hover{background:var(--cream-3);color:var(--text);}
+.nav-item.active{background:var(--text);color:var(--cream);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-item .ni-icon{font-size:20px;}
+.nav-item .ni-label{font-size:9.5px;font-weight:500;}
+
+.main{margin-left:84px;padding:32px 40px 120px;max-width:1240px;}
+@media(max-width:900px){.main{margin-left:0;padding:90px 18px 110px;}.sidebar{display:none;}}
+
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px;gap:20px;flex-wrap:wrap;}
+.page-greet{font-size:13px;color:var(--text-3);margin-bottom:6px;}
+.page-title{font-family:var(--font-serif);font-size:42px;font-weight:600;letter-spacing:-0.02em;line-height:1.15;}
+.page-sub{font-size:14px;color:var(--text-3);margin-top:8px;max-width:420px;}
+.page-actions{display:flex;gap:10px;align-items:center;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border-radius:var(--r-pill);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s;border:1px solid transparent;white-space:nowrap;}
+.btn-primary{background:var(--text);color:var(--cream);}
+.btn-primary:hover{background:var(--accent);}
+.btn-secondary{background:var(--white);color:var(--text);border-color:var(--border-2);}
+.btn-icon{width:40px;height:40px;border-radius:50%;background:var(--white);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.btn-icon:hover{border-color:var(--text-4);}
+
+.card{background:var(--white);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);transition:all .2s;}
+.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.section-title{font-family:var(--font-serif);font-size:22px;font-weight:600;margin:36px 0 18px;display:flex;align-items:center;justify-content:space-between;}
+.section-title .more{font-size:12.5px;color:var(--accent);font-family:var(--font-sans);cursor:pointer;}
+
+.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+@media(max-width:900px){.dashboard-grid{grid-template-columns:1fr;}}
+.dash-card{padding:22px;border-radius:var(--r);background:var(--white);box-shadow:var(--shadow);cursor:pointer;transition:all .2s;}
+.dash-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.dash-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;}
+.dash-value{font-family:var(--font-serif);font-size:28px;font-weight:600;margin-bottom:4px;}
+.dash-label{font-size:12.5px;color:var(--text-3);}
+.dash-desc{font-size:11.5px;color:var(--text-4);margin-top:4px;}
+
+.tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.tab{padding:7px 14px;border-radius:var(--r-pill);font-size:12.5px;color:var(--text-3);cursor:pointer;background:var(--cream-2);border:1px solid transparent;transition:all .15s;}
+.tab:hover{color:var(--text);background:var(--cream-3);}
+.tab.active{background:var(--text);color:var(--cream);}
+
+.feed{display:flex;flex-direction:column;gap:14px;}
+.post-card{background:var(--white);border-radius:var(--r-sm);padding:18px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;display:flex;gap:16px;}
+.post-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px);}
+.post-thumb{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:var(--cream-2);}
+.post-body{flex:1;min-width:0;}
+.post-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px;color:var(--text-3);}
+.post-author{font-weight:600;color:var(--text-2);}
+.post-title{font-size:15px;font-weight:600;margin-bottom:6px;line-height:1.4;}
+.post-excerpt{font-size:13px;color:var(--text-3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.post-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.tag{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--cream-2);color:var(--text-2);}
+.post-foot{display:flex;gap:16px;margin-top:10px;font-size:12px;color:var(--text-4);}
+
+.book-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:1100px){.book-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:760px){.book-grid{grid-template-columns:repeat(2,1fr);}}
+.book-card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;}
+.book-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.book-cover{height:170px;display:flex;align-items:center;justify-content:center;position:relative;}
+.book-cover-text{width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:30px;font-weight:600;color:var(--text-2);box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.book-status{position:absolute;top:12px;right:12px;font-size:10px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,0.9);color:var(--text-2);font-weight:600;}
+.book-info{padding:16px;}
+.book-title{font-size:14px;font-weight:600;margin-bottom:3px;}
+.book-author{font-size:12px;color:var(--text-3);margin-bottom:10px;}
+.book-meta{font-size:11px;color:var(--text-4);}
+
+.insp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.insp-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.insp-grid{grid-template-columns:1fr;}}
+.insp-card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;}
+.insp-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.insp-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.insp-body{padding:16px;}
+.insp-body h4{font-size:14px;font-weight:600;margin-bottom:4px;}
+.insp-body p{font-size:12px;color:var(--text-3);line-height:1.5;}
+
+.compass-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+@media(max-width:760px){.compass-grid{grid-template-columns:1fr;}}
+.compass-card{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;}
+.compass-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.compass-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.compass-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.compass-title{font-size:15px;font-weight:600;}
+.compass-en{font-size:10px;color:var(--text-4);text-transform:uppercase;letter-spacing:0.05em;}
+.compass-desc{font-size:12.5px;color:var(--text-3);line-height:1.55;margin-bottom:12px;}
+.compass-bar{height:4px;background:var(--cream-3);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.compass-fill{height:100%;background:linear-gradient(90deg,var(--accent),#34c759);border-radius:2px;}
+.compass-meta{font-size:11px;color:var(--text-4);display:flex;justify-content:space-between;}
+
+.profile-head{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
+.profile-avatar{width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,var(--accent),#34c759);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;}
+.profile-name{font-family:var(--font-serif);font-size:28px;font-weight:600;}
+.profile-meta{font-size:13px;color:var(--text-3);margin-top:4px;}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:560px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-card{background:var(--white);border-radius:var(--r-sm);padding:18px;text-align:center;box-shadow:var(--shadow);}
+.stat-icon{font-size:22px;margin-bottom:8px;}
+.stat-value{font-family:var(--font-serif);font-size:22px;font-weight:600;}
+.stat-label{font-size:11px;color:var(--text-3);margin-top:4px;}
+
+.form-card{background:var(--white);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);}
+.form-group{margin-bottom:18px;}
+.form-label{font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:6px;display:block;}
+.form-input,.form-select,.form-textarea{width:100%;padding:11px 14px;border:1px solid var(--border-2);border-radius:12px;font-size:14px;background:var(--cream);color:var(--text);outline:none;transition:all .15s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,136,78,0.12);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+
+/* Feature cards */
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+@media(max-width:900px){.feature-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.feature-grid{grid-template-columns:1fr;}}
+.feature-card{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:10px;}
+.feature-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.feature-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.feature-name{font-size:15px;font-weight:600;}
+.feature-desc{font-size:12px;color:var(--text-3);line-height:1.5;}
+.feature-count{font-size:11px;color:var(--text-4);margin-top:auto;}
+
+/* ============ Alchemy GitHub-style ============ */
+.topic-grid{display:flex;flex-direction:column;gap:14px;}
+.topic-card{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;border:1px solid transparent;}
+.topic-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px);border-color:var(--border-2);}
+.topic-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
+.topic-title{font-family:var(--font-serif);font-size:18px;font-weight:600;line-height:1.35;}
+.topic-status{font-size:10.5px;padding:4px 10px;border-radius:var(--r-pill);font-weight:600;white-space:nowrap;}
+.topic-status.active{background:var(--orange);color:var(--text);}
+.topic-status.done{background:var(--green);color:var(--text);}
+.topic-desc{font-size:13px;color:var(--text-3);line-height:1.55;margin-bottom:12px;}
+.topic-meta{display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--text-4);flex-wrap:wrap;}
+.topic-meta .ver{font-weight:600;color:var(--accent);}
+.topic-contributors{display:flex;margin-left:auto;}
+.topic-contributors span{width:22px;height:22px;border-radius:50%;background:var(--cream-2);border:2px solid var(--white);display:flex;align-items:center;justify-content:center;font-size:10px;margin-left:-6px;}
+.topic-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+
+.version-timeline{display:flex;flex-direction:column;gap:0;position:relative;margin:18px 0;padding-left:22px;}
+.version-timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--border-2);}
+.version-item{position:relative;padding:14px 0 14px 18px;}
+.version-item::before{content:"";position:absolute;left:-19px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--cream-2);border:2px solid var(--accent);}
+.version-item:first-child::before{background:var(--accent);}
+.version-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.version-tag{font-size:11px;font-weight:700;color:var(--accent);background:var(--cream-2);padding:2px 8px;border-radius:6px;}
+.version-editor{font-size:12px;color:var(--text-2);font-weight:500;}
+.version-time{font-size:11px;color:var(--text-4);}
+.version-summary{font-size:13px;color:var(--text-2);margin-bottom:6px;}
+.version-content{font-size:13px;color:var(--text-3);line-height:1.6;background:var(--cream);padding:12px;border-radius:10px;border-left:3px solid var(--border-2);}
+.topic-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+
+.edit-form textarea{width:100%;min-height:140px;padding:14px;border:1px solid var(--border-2);border-radius:12px;background:var(--white);font-size:14px;line-height:1.6;outline:none;resize:vertical;}
+.edit-form textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,136,78,0.12);}
+
+.tabbar{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--cream-2);border-top:1px solid var(--border);padding:8px 0 calc(8px + env(safe-area-inset-bottom));justify-content:space-around;z-index:100;}
+@media(max-width:900px){.tabbar{display:flex;}}
+.tabbar-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:var(--text-3);cursor:pointer;padding:6px 8px;flex:1;}
+.tabbar-item.active{color:var(--text);}
+.tabbar-item .tb-icon{font-size:20px;}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(30,25,20,0.25);z-index:200;backdrop-filter:blur(8px);}
+.overlay.show{display:flex;align-items:center;justify-content:center;}
+.sheet{background:var(--cream);border-radius:24px;padding:28px;width:100%;max-width:620px;max-height:85vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,0.2);margin:20px;position:relative;}
+.sheet-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--text-3);}
+.search-input-wrap{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:16px;padding:12px 16px;border:1px solid var(--border);margin-bottom:18px;}
+.search-input-wrap input{flex:1;border:none;background:none;outline:none;font-size:15px;color:var(--text);}
+.search-suggest{display:flex;flex-wrap:wrap;gap:8px;}
+.search-suggest span{font-size:12px;padding:6px 12px;background:var(--white);border-radius:var(--r-pill);cursor:pointer;border:1px solid var(--border);}
+.empty-state{padding:40px;text-align:center;color:var(--text-4);font-size:13px;background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);}
+.fab{position:fixed;bottom:28px;right:28px;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 6px 20px rgba(194,136,78,0.35);z-index:90;}
+@media(max-width:900px){.fab{bottom:78px;right:16px;}}
+.page{display:none;}
+.page.active{display:block;animation:fadeIn .4s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="logo-mark">🌱</div>
+  <nav class="nav-items">
+    <div class="nav-item active" data-p="home" onclick="go('home')"><span class="ni-icon">🏠</span><span class="ni-label">首页</span></div>
+    <div class="nav-item" data-p="camp" onclick="go('camp')"><span class="ni-icon">📚</span><span class="ni-label">共读</span></div>
+    <div class="nav-item" data-p="journal" onclick="go('journal')"><span class="ni-icon">📓</span><span class="ni-label">手帐</span></div>
+    <div class="nav-item" data-p="question" onclick="go('question')"><span class="ni-icon">💡</span><span class="ni-label">问题</span></div>
+    <div class="nav-item" data-p="books" onclick="go('books')"><span class="ni-icon">📖</span><span class="ni-label">图书</span></div>
+    <div class="nav-item" data-p="alchemy" onclick="go('alchemy')"><span class="ni-icon">⚗️</span><span class="ni-label">炼金</span></div>
+    <div class="nav-item" data-p="compass" onclick="go('compass')"><span class="ni-icon">🧭</span><span class="ni-label">罗盘</span></div>
+    <div class="nav-item" data-p="profile" onclick="go('profile')"><span class="ni-icon">👤</span><span class="ni-label">我的</span></div>
+  </nav>
+</aside>
+<main class="main">
+<!-- Home -->
+<div class="page active" id="p-home">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">Good Morning,</div>
+      <h1 class="page-title">成长社</h1>
+      <p class="page-sub">在共创中成长，在记录中蜕变。今天也是向前一步的好日子。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn-icon" onclick="toggleTheme()">🌙</button>
+      <button class="btn-icon" onclick="openSearch()">🔍</button>
+      <button class="btn btn-primary" onclick="openCompose()">+ 发布</button>
+    </div>
+  </div>
+  <div class="dashboard-grid">
+    <div class="dash-card" onclick="go('camp')" style="border-left:4px solid var(--pink);">
+      <div class="dash-icon" style="background:var(--pink);">📚</div>
+      <div class="dash-value">未设置</div>
+      <div class="dash-label">共读书目</div>
+      <div class="dash-desc">下一期共读营筹备中</div>
+    </div>
+    <div class="dash-card" onclick="go('journal')" style="border-left:4px solid var(--blue);">
+      <div class="dash-icon" style="background:var(--blue);">📓</div>
+      <div class="dash-value">56 篇</div>
+      <div class="dash-label">手帐灵感</div>
+      <div class="dash-desc">今日新增 12 篇</div>
+    </div>
+    <div class="dash-card" onclick="go('question')" style="border-left:4px solid var(--green);">
+      <div class="dash-icon" style="background:var(--green);">💡</div>
+      <div class="dash-value">23 个</div>
+      <div class="dash-label">待解问题</div>
+      <div class="dash-desc">已有 89 个共创方案</div>
+    </div>
+  </div>
+  <div class="section-title">功能入口</div>
+  <div class="feature-grid">
+    <div class="feature-card" onclick="go('camp')">
+      <div class="feature-icon" style="background:var(--pink);">📚</div>
+      <div class="feature-name">共读空间</div>
+      <div class="feature-desc">共读好书，每日打卡，结营生成笔记合集。</div>
+      <div class="feature-count">书目未设置</div>
+    </div>
+    <div class="feature-card" onclick="go('journal')">
+      <div class="feature-icon" style="background:var(--blue);">📓</div>
+      <div class="feature-name">手帐广场</div>
+      <div class="feature-desc">分享排版巧思，按风格检索，收藏抄作业。</div>
+      <div class="feature-count">今日 38 篇</div>
+    </div>
+    <div class="feature-card" onclick="go('question')">
+      <div class="feature-icon" style="background:var(--green);">💡</div>
+      <div class="feature-name">问题共创</div>
+      <div class="feature-desc">提出真实困境，协作给方案，沉淀解题模型。</div>
+      <div class="feature-count">待解 23 个</div>
+    </div>
+    <div class="feature-card" onclick="go('books')">
+      <div class="feature-icon" style="background:var(--purple);">📖</div>
+      <div class="feature-name">图书角</div>
+      <div class="feature-desc">上传分享成长好书，共建社区书库。</div>
+      <div class="feature-count">87 本已收录</div>
+    </div>
+    <div class="feature-card" onclick="go('alchemy')">
+      <div class="feature-icon" style="background:var(--orange);">⚗️</div>
+      <div class="feature-name">炼金实验室</div>
+      <div class="feature-desc">把心理困境炼成成长方案，深度共创实验。</div>
+      <div class="feature-count">5 个实验中</div>
+    </div>
+    <div class="feature-card" onclick="go('compass')">
+      <div class="feature-icon" style="background:var(--yellow);">🧭</div>
+      <div class="feature-name">成长罗盘</div>
+      <div class="feature-desc">8 维度成长矩阵，查看你的成长全景。</div>
+      <div class="feature-count">8 维度</div>
+    </div>
+    <div class="feature-card" onclick="go('profile')">
+      <div class="feature-icon" style="background:var(--pink);">👤</div>
+      <div class="feature-name">我的主页</div>
+      <div class="feature-desc">成长数据、徽章、时间线与个人雷达图。</div>
+      <div class="feature-count">LV.5 共创者</div>
+    </div>
+    <div class="feature-card" onclick="openCompose()">
+      <div class="feature-icon" style="background:var(--cream-3);">＋</div>
+      <div class="feature-name">发布内容</div>
+      <div class="feature-desc">快速发布笔记、打卡、提问或上传图书。</div>
+      <div class="feature-count">6 种类型</div>
+    </div>
+  </div>
+
+  <div class="section-title">最新动态 <span class="more" onclick="go('camp')">查看全部</span></div>
+  <div class="tabs" data-tabs="home">
+    <span class="tab active" data-filter="all">全部</span>
+    <span class="tab" data-filter="camp">共读</span>
+    <span class="tab" data-filter="journal">手帐</span>
+    <span class="tab" data-filter="question">问题</span>
+    <span class="tab" data-filter="solution">方案</span>
+  </div>
+  <div class="feed" id="feed-home"></div>
+</div>
+
+<!-- Camp -->
+<div class="page" id="p-camp">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">共读空间</div>
+      <h1 class="page-title">共读空间</h1>
+      <p class="page-sub">共读书目未设置，敬请期待下一期共读营。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="openCompose()">+ 打卡</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px;text-align:center;padding:40px 24px;">
+    <div style="font-size:36px;margin-bottom:12px;">📚</div>
+    <div style="font-family:var(--font-serif);font-size:20px;font-weight:600;margin-bottom:6px;">共读书目未设置</div>
+    <div style="font-size:13px;color:var(--text-3);">管理员尚未设置当前共读书目，请稍后再来查看。</div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px;background:linear-gradient(135deg,var(--cream-2),var(--white));border:1px solid var(--border-2);">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:22px;">🧠</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:600;">AI 共读知识库</div>
+        <div style="font-size:12px;color:var(--text-3);margin-top:2px;">基于共读经验贴，提问即得参考答案</div>
+      </div>
+      <button class="btn btn-primary" onclick="openAIKnowledge()">向知识库提问</button>
+    </div>
+  </div>
+
+  <div class="feed" id="feed-camp"></div>
+</div>
+
+<!-- Journal -->
+<div class="page" id="p-journal">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">灵感广场</div>
+      <h1 class="page-title">手帐巧思</h1>
+      <p class="page-sub">分享排版与配色，收藏喜欢的模板。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="openCompose()">+ 分享</button>
+    </div>
+  </div>
+  <div class="tabs" data-tabs="journal">
+    <span class="tab active" data-filter="all">全部</span>
+    <span class="tab" data-filter="极简风">极简风</span>
+    <span class="tab" data-filter="复古风">复古风</span>
+    <span class="tab" data-filter="习惯追踪">习惯追踪</span>
+  </div>
+  <div class="insp-grid" id="insp-grid"></div>
+</div>
+
+<!-- Question -->
+<div class="page" id="p-question">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">问题共创</div>
+      <h1 class="page-title">Question Feed</h1>
+      <p class="page-sub">提出真实困境，汇聚社区智慧，沉淀可复用方案。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="openCompose()">+ 提问</button>
+    </div>
+  </div>
+  <div class="tabs" data-tabs="question">
+    <span class="tab active" data-filter="all">全部</span>
+    <span class="tab" data-filter="待投票">待解决</span>
+    <span class="tab" data-filter="已沉淀">已沉淀</span>
+    <span class="tab" data-filter="hot">热门</span>
+  </div>
+  <div class="feed" id="feed-question"></div>
+</div>
+
+<!-- Books -->
+<div class="page" id="p-books">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">社区图书角</div>
+      <h1 class="page-title">Bookshelf</h1>
+      <p class="page-sub">上传好书，共建成长书库。无需注册，填写信息即可。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="document.getElementById('uploadZone').scrollIntoView({behavior:'smooth'})">+ 上传图书</button>
+    </div>
+  </div>
+  <div class="tabs" data-tabs="books">
+    <span class="tab active" data-filter="all">全部</span>
+    <span class="tab" data-filter="心理学">心理学</span>
+    <span class="tab" data-filter="成长思维">成长思维</span>
+  </div>
+  <div class="book-grid" id="book-grid"></div>
+  <div class="section-title" id="uploadZone">上传图书</div>
+  <div class="form-card">
+    <form id="bookUploadForm" onsubmit="submitBook(event)">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">书名 *</label><input class="form-input" name="title" placeholder="如：原子习惯" required></div>
+        <div class="form-group"><label class="form-label">作者 *</label><input class="form-input" name="author" placeholder="如：James Clear" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ISBN</label><input class="form-input" name="isbn" placeholder="可选"></div>
+        <div class="form-group"><label class="form-label">分类 *</label>
+          <select class="form-select" name="category" required>
+            <option value="">选择分类</option>
+            <option>心理学</option><option>成长思维</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">推荐理由 *</label><textarea class="form-textarea" name="reason" placeholder="这本书为什么值得读？" required></textarea></div>
+      <div class="form-group"><label class="form-label">你的称呼</label><input class="form-input" name="uploader" placeholder="如：小满（可选）"></div>
+      <button type="submit" class="btn btn-primary">提交上传</button>
+    </form>
+    <div id="uploadSuccess" style="display:none;margin-top:16px;background:var(--green);padding:16px;border-radius:14px;color:var(--text);">
+      <h4 style="margin-bottom:6px;">✓ 上传成功</h4>
+      <p id="successMsg"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Alchemy -->
+<div class="page" id="p-alchemy">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">心理炼金实验室</div>
+      <h1 class="page-title">Alchemy Lab</h1>
+      <p class="page-sub">围绕成长话题持续共创，像 GitHub 一样迭代版本，而不是重复提问。</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" onclick="openTopicCreate()">+ 发起话题</button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid" style="margin-bottom:28px;">
+    <div class="dash-card" style="background:var(--pink);">
+      <div class="dash-value">6</div>
+      <div class="dash-label" style="color:var(--text);">进行中话题</div>
+    </div>
+    <div class="dash-card" style="background:var(--orange);">
+      <div class="dash-value">38</div>
+      <div class="dash-label" style="color:var(--text);">总编辑次数</div>
+    </div>
+    <div class="dash-card" style="background:var(--purple);">
+      <div class="dash-value">24</div>
+      <div class="dash-label" style="color:var(--text);">共创贡献者</div>
+    </div>
+  </div>
+
+  <div class="tabs" data-tabs="alchemy">
+    <span class="tab active" data-filter="all">全部</span>
+    <span class="tab" data-filter="熔炼中">熔炼中</span>
+    <span class="tab" data-filter="已结晶">已结晶</span>
+    <span class="tab" data-filter="高敏感">高敏感</span>
+    <span class="tab" data-filter="拖延">拖延</span>
+  </div>
+
+  <div class="topic-grid" id="topic-grid"></div>
+</div>
+
+<!-- Compass -->
+<div class="page" id="p-compass">
+  <div class="page-header">
+    <div>
+      <div class="page-greet">Growth Compass</div>
+      <h1 class="page-title">成长罗盘</h1>
+      <p class="page-sub">8 个维度构成的成长全景图。</p>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:28px;text-align:center;padding:32px;">
+    <div style="font-size:13px;color:var(--text-3);margin-bottom:12px;">个人成长矩阵 · 8 维度</div>
+    <svg viewBox="0 0 360 360" width="280" height="280" style="margin:0 auto;">
+      <circle cx="180" cy="180" r="40" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="80" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="120" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <line x1="180" y1="40" x2="180" y2="320" stroke="var(--border-2)" stroke-width="0.5"/>
+      <line x1="40" y1="180" x2="320" y2="180" stroke="var(--border-2)" stroke-width="0.5"/>
+      <line x1="85.86" y1="85.86" x2="274.14" y2="274.14" stroke="var(--border-2)" stroke-width="0.5"/>
+      <line x1="274.14" y1="85.86" x2="85.86" y2="274.14" stroke="var(--border-2)" stroke-width="0.5"/>
+      <polygon points="180,44 217.99,86.86 232.8,180 217.99,246.14 180,244 165.86,217.99 134,180 165.86,114.86" fill="rgba(194,136,78,0.25)" stroke="var(--accent)" stroke-width="1.5"/>
+      <circle cx="180" cy="44" r="3.5" fill="var(--accent)"/>
+      <circle cx="217.99" cy="86.86" r="3.5" fill="var(--accent)"/>
+      <circle cx="232.8" cy="180" r="3.5" fill="var(--accent)"/>
+      <circle cx="217.99" cy="246.14" r="3.5" fill="var(--accent)"/>
+      <circle cx="180" cy="244" r="3.5" fill="var(--accent)"/>
+      <circle cx="165.86" cy="217.99" r="3.5" fill="var(--accent)"/>
+      <circle cx="134" cy="180" r="3.5" fill="var(--accent)"/>
+      <circle cx="165.86" cy="114.86" r="3.5" fill="var(--accent)"/>
+    </svg>
+  </div>
+  <div class="compass-grid">
+    <div class="compass-card" onclick="openCompassDetail('evolution')"><div class="compass-head"><div class="compass-icon" style="background:var(--pink);">🧠</div><div><div class="compass-title">意识自我进化矩阵</div><div class="compass-en">Consciousness Evolution</div></div></div><div class="compass-desc">通过提议和接受建议，发展、扩展自我意识。</div><div class="compass-bar"><div class="compass-fill" style="width:90%;"></div></div><div class="compass-meta"><span>90%</span><span>3 笔记</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('subconscious')"><div class="compass-head"><div class="compass-icon" style="background:var(--purple);">🔮</div><div><div class="compass-title">潜意识重塑算法</div><div class="compass-en">Subconscious Reprogramming</div></div></div><div class="compass-desc">算法级地重新编程逻辑限制性信念。</div><div class="compass-bar"><div class="compass-fill" style="width:60%;"></div></div><div class="compass-meta"><span>60%</span><span>1 实验</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('prototype')"><div class="compass-head"><div class="compass-icon" style="background:var(--blue);">🛠️</div><div><div class="compass-title">原型自我精雕级造</div><div class="compass-en">Self Prototype Craftship</div></div></div><div class="compass-desc">了解各种性格与人格，精雕自我的过程。</div><div class="compass-bar"><div class="compass-fill" style="width:75%;"></div></div><div class="compass-meta"><span>75%</span><span>3 笔记</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('mastery')"><div class="compass-head"><div class="compass-icon" style="background:var(--green);">🕸️</div><div><div class="compass-title">自我掌握和网络</div><div class="compass-en">Self Mastery & Network</div></div></div><div class="compass-desc">培养与世界的关系网络，从孤立到连接。</div><div class="compass-bar"><div class="compass-fill" style="width:50%;"></div></div><div class="compass-meta"><span>50%</span><span>2 小组</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('wisdom')"><div class="compass-head"><div class="compass-icon" style="background:var(--yellow);">📚</div><div><div class="compass-title">智慧瀚海练舟</div><div class="compass-en">Wisdom Ocean Navigation</div></div></div><div class="compass-desc">在知识的瀚海中练舟，构建完整认知地图。</div><div class="compass-bar"><div class="compass-fill" style="width:85%;"></div></div><div class="compass-meta"><span>85%</span><span>4 本共读</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('relational')"><div class="compass-head"><div class="compass-icon" style="background:var(--pink);">🤝</div><div><div class="compass-title">自我关联打造</div><div class="compass-en">Relational Self Building</div></div></div><div class="compass-desc">培养与宇宙、他人的一切关系。</div><div class="compass-bar"><div class="compass-fill" style="width:65%;"></div></div><div class="compass-meta"><span>65%</span><span>23 互动</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('focus')"><div class="compass-head"><div class="compass-icon" style="background:var(--orange);">🎯</div><div><div class="compass-title">心灵谱导器</div><div class="compass-en">Mindful Navigator</div></div></div><div class="compass-desc">增强沉浸任务的能力，培养心流状态。</div><div class="compass-bar"><div class="compass-fill" style="width:70%;"></div></div><div class="compass-meta"><span>70%</span><span>12 练习</span></div></div>
+    <div class="compass-card" onclick="openCompassDetail('potential')"><div class="compass-head"><div class="compass-icon" style="background:var(--purple);">♾️</div><div><div class="compass-title">自我无限潜力库</div><div class="compass-en">Infinite Potential Bank</div></div></div><div class="compass-desc">建立自我无限潜力库，探索新视野。</div><div class="compass-bar"><div class="compass-fill" style="width:40%;"></div></div><div class="compass-meta"><span>40%</span><span>解锁中</span></div></div>
+  </div>
+</div>
+
+<!-- Profile -->
+<div class="page" id="p-profile">
+  <div class="page-header">
+    <div class="profile-head">
+      <div class="profile-avatar">🌱</div>
+      <div>
+        <div class="profile-name">小满</div>
+        <div class="profile-meta">加入 187 天 · LV.5 共创者</div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-value">4</div><div class="stat-label">共读</div></div>
+    <div class="stat-card"><div class="stat-icon">📓</div><div class="stat-value">56</div><div class="stat-label">手帐</div></div>
+    <div class="stat-card"><div class="stat-icon">💡</div><div class="stat-value">8</div><div class="stat-label">方案</div></div>
+    <div class="stat-card"><div class="stat-icon">⚗️</div><div class="stat-value">3</div><div class="stat-label">炼金</div></div>
+    <div class="stat-card"><div class="stat-icon">📖</div><div class="stat-value">12</div><div class="stat-label">图书</div></div>
+  </div>
+  <div class="card" style="margin-bottom:28px;text-align:center;padding:32px;">
+    <div style="font-size:13px;color:var(--text-3);margin-bottom:12px;">我的成长矩阵</div>
+    <svg viewBox="0 0 360 360" width="280" height="280" style="margin:0 auto;">
+      <circle cx="180" cy="180" r="40" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="80" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="120" fill="none" stroke="var(--border-2)" stroke-width="0.5"/>
+      <polygon points="180,44 217.99,86.86 232.8,180 217.99,246.14 180,244 165.86,217.99 134,180 165.86,114.86" fill="rgba(194,136,78,0.25)" stroke="var(--accent)" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="section-title">成长时间线</div>
+  <div class="feed" id="feed-profile"></div>
+</div>
+
+</main>
+
+<div class="tabbar">
+  <div class="tabbar-item active" data-p="home" onclick="go('home')"><span class="tb-icon">🏠</span>首页</div>
+  <div class="tabbar-item" data-p="camp" onclick="go('camp')"><span class="tb-icon">📚</span>共读</div>
+  <div class="tabbar-item" data-p="journal" onclick="go('journal')"><span class="tb-icon">📓</span>手帐</div>
+  <div class="tabbar-item" data-p="alchemy" onclick="go('alchemy')"><span class="tb-icon">⚗️</span>心理炼金</div>
+  <div class="tabbar-item" data-p="books" onclick="go('books')"><span class="tb-icon">📖</span>图书</div>
+</div>
+
+<button class="fab" onclick="openCompose()">+</button>
+
+<!-- Search Overlay -->
+<div class="overlay" id="overlay-search" onclick="closeSearch()">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <button class="sheet-close" onclick="closeSearch()">✕</button>
+    <div class="search-input-wrap">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="搜索笔记、手帐、问题、方案...">
+      <button class="btn btn-primary btn-sm" onclick="doSearch()">搜索</button>
+    </div>
+    <div style="font-size:12px;color:var(--text-3);margin-bottom:10px;">热门搜索</div>
+    <div class="search-suggest">
+      <span onclick="quickSearch('原子习惯')">原子习惯</span>
+      <span onclick="quickSearch('拖延症')">拖延症</span>
+      <span onclick="quickSearch('极简风')">极简风</span>
+      <span onclick="quickSearch('晨间日记')">晨间日记</span>
+      <span onclick="quickSearch('完美主义')">完美主义</span>
+    </div>
+    <div id="searchResults" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+<!-- Detail Overlay -->
+<div class="overlay" id="overlay-detail" onclick="closeDetail()">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <button class="sheet-close" onclick="closeDetail()">✕</button>
+    <div id="detail-content"></div>
+  </div>
+</div>
+
+<!-- Compose Overlay -->
+<div class="overlay" id="overlay-compose" onclick="closeCompose()">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <button class="sheet-close" onclick="closeCompose()">✕</button>
+    <h2 style="font-family:var(--font-serif);font-size:22px;margin-bottom:18px;">发布内容</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose();go('books')"><div style="font-size:28px;margin-bottom:8px;">📖</div><div style="font-size:13px;font-weight:600;">上传图书</div></div>
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose();go('camp')"><div style="font-size:28px;margin-bottom:8px;">📚</div><div style="font-size:13px;font-weight:600;">共读打卡</div></div>
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose();go('journal')"><div style="font-size:28px;margin-bottom:8px;">📓</div><div style="font-size:13px;font-weight:600;">手帐灵感</div></div>
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose();go('question')"><div style="font-size:28px;margin-bottom:8px;">💡</div><div style="font-size:13px;font-weight:600;">提出问题</div></div>
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose();go('alchemy')"><div style="font-size:28px;margin-bottom:8px;">⚗️</div><div style="font-size:13px;font-weight:600;">发起实验</div></div>
+      <div class="card" style="text-align:center;cursor:pointer;" onclick="closeCompose()"><div style="font-size:28px;margin-bottom:8px;">📝</div><div style="font-size:13px;font-weight:600;">随笔记</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+const POSTS = {
+  home: [
+    {type:'camp',avatar:'林',author:'林小满',time:'2 小时前',title:'《原子习惯》Day 7：身份认同比目标更重要',excerpt:'今天读到"改变身份认同"那章，突然明白了为什么之前的减肥计划总是失败……',tags:['原子习惯','身份认同'],comments:12,likes:45},
+    {type:'journal',avatar:'苏',author:'苏念',time:'5 小时前',title:'极简风周计划排版 · 三栏法',excerpt:'摸索了三个月终于定下来的周计划模板，核心思路是三栏法……',tags:['极简风','周计划'],comments:23,likes:89},
+    {type:'question',avatar:'周',author:'周明',time:'1 天前',title:'如何克服"完美主义拖延"？',excerpt:'每次想开始新项目，脑子里就有个声音说准备得还不够……',tags:['拖延症','完美主义'],comments:34,likes:67},
+    {type:'solution',avatar:'陈',author:'陈默',time:'2 天前',title:'五分钟启动法',excerpt:'把任务拆到五分钟能完成的颗粒度，降低启动门槛……',tags:['可复用方案','拖延症'],comments:18,likes:124},
+  ],
+  camp: [],
+  question: [
+    {type:'question',avatar:'周',author:'周明',time:'1 天前',title:'如何克服完美主义拖延？',excerpt:'困扰好几年了，每次想开始新项目就一直拖着……',tags:['拖延症','完美主义'],comments:34,likes:67,views:'1.2k',status:'待投票'},
+    {type:'question',avatar:'林',author:'林小满',time:'3 天前',title:'怎么建立成长型思维？',excerpt:'工作五年了，每次有机会都觉得我可能不行……',tags:['成长思维'],comments:28,likes:89,views:'980',status:'已沉淀',solved:true},
+  ],
+  alchemy: [
+    {type:'alchemy',avatar:'林',author:'林小满',time:'3 天前',title:'高敏感如何炼成超能力',excerpt:'别人一句无心的话我能反复咀嚼一整天……',tags:['高敏感'],comments:41,views:'892',status:'熔炼中 · 23 条洞察'},
+    {type:'alchemy',avatar:'周',author:'周明',time:'5 天前',title:'冒名顶替综合征的炼金实验',excerpt:'每次被夸奖都觉得自己是骗子……',tags:['自我价值'],comments:38,views:'1.1k',status:'提纯中 · 投票阶段'},
+    {type:'solution',avatar:'陈',author:'陈默',time:'1 周前',title:'害怕被拒绝炼成了主动力',excerpt:'经过14天熔炼，沉淀出脱敏四阶法。',tags:['拒绝敏感'],comments:52,bookmarks:287,status:'已入库'},
+  ],
+  profile: [
+    {type:'solution',time:'3 天前',title:'获得徽章：方案贡献者',excerpt:'你的方案被203人收藏。',tags:[],comments:0,likes:0},
+    {type:'camp',time:'1 周前',title:'完成《认知觉醒》共读营',excerpt:'21天全勤打卡。',tags:[],comments:0,likes:0},
+  ]
+};
+const TYPE_LABELS = {camp:'共读',journal:'手帐',question:'提问',solution:'方案',alchemy:'炼金'};
+const INSP_DATA = [
+  {icon:'📔',bg:'var(--pink)',title:'极简风周计划',desc:'莫兰迪灰加脏粉',tags:['极简风']},
+  {icon:'🗓️',bg:'var(--yellow)',title:'月度习惯追踪表',desc:'圆点打卡法',tags:['习惯追踪']},
+  {icon:'🌸',bg:'var(--green)',title:'晨间日记模板',desc:'感恩三件事',tags:['晨间日记']},
+  {icon:'🌿',bg:'var(--blue)',title:'每周复盘九宫格',desc:'九个维度复盘',tags:['复盘']},
+  {icon:'💧',bg:'var(--purple)',title:'读书笔记子弹法',desc:'子弹笔记整理',tags:['读书笔记']},
+  {icon:'🍂',bg:'var(--orange)',title:'复古牛皮纸排版',desc:'治愈感排版',tags:['复古风']},
+];
+const MORANDI = ['var(--pink)','var(--blue)','var(--green)','var(--purple)','var(--yellow)','var(--orange)'];
+const DEFAULT_BOOKS = [
+  {bg:'var(--purple)',title:'自信的陷阱',author:'Russ Harris',statusLabel:'共读中',cat:'心理学',readers:89,rating:4.6},
+  {bg:'var(--pink)',title:'改变，问题的解决和原则',author:'Paul Watzlawick',statusLabel:'已读完',cat:'心理学',readers:64,rating:4.7},
+  {bg:'var(--blue)',title:'麦肯锡思考工具',author:'大前研一',statusLabel:'共读中',cat:'成长思维',readers:112,rating:4.5},
+  {bg:'var(--green)',title:'最小阻力之路',author:'Robert Fritz',statusLabel:'已读完',cat:'成长思维',readers:76,rating:4.4},
+];
+let BOOK_DATA = JSON.parse(localStorage.getItem('gt_books_v3') || JSON.stringify(DEFAULT_BOOKS));
+const COMPASS_DETAIL = {
+  evolution:{title:'意识自我进化矩阵',icon:'🧠',desc:'意识进化的核心是扩展你能看到的可能性边界。',practices:['每日提问三个为什么不能这样做','每周接纳一条不同建议','阅读刻意去熟悉领域的书籍']},
+  subconscious:{title:'潜意识重塑算法',icon:'🔮',desc:'表层行为改变很快，但底层信念改变很慢。',practices:['识别3个核心限制性信念','用炼金实验逐个拆解','建立新行为锚点']},
+  prototype:{title:'原型自我精雕级造',icon:'🛠️',desc:'你是哪个版本的自己？',practices:['MBTI测评','与不同人格模型的人对话','共读人格原型分析']},
+  mastery:{title:'自我掌握和网络',icon:'🕸️',desc:'掌握不是控制一切。',practices:['每月联系一位旧友','加入兴趣小组','绘制关系网络图']},
+  wisdom:{title:'智慧瀚海练舟',icon:'📚',desc:'在知识海洋里从拾贝到造船。',practices:['每季度完成一本共读书','建立知识卡片库','每月产出1篇结构化笔记']},
+  relational:{title:'自我关联打造',icon:'🤝',desc:'你与宇宙的关系通过具体的人体现。',practices:['每周深度对话一次','加入小组承担角色','回应3个陌生人问题']},
+  focus:{title:'心灵谱导器',icon:'🎯',desc:'沉浸是当代最稀缺的注意力形态。',practices:['每日25分钟番茄钟','手帐时段关闭通知','记录心流条件']},
+  potential:{title:'自我无限潜力库',icon:'♾️',desc:'潜力越用越多。',practices:['每季度尝试全新活动','记录突破','加入炼金实验']},
+};
+const FILTER_MAP = {'推荐':'all','关注':'follow','精选':'best','全部':'all','待解决':'待投票','已沉淀':'已沉淀','热门':'hot','原料投放':'投放中','熔炼反应':'熔炼中','提纯结晶':'提纯中','成品入库':'已入库'};
+
+// ============ Alchemy Topics (GitHub-style) ============
+let ALCHEMY_TOPICS = JSON.parse(localStorage.getItem('gt_topics_v1') || JSON.stringify([
+  {
+    id:'t1', title:'高敏感如何炼成深度共情力', desc:'把过度内耗转化为对他人情绪的敏锐觉察与回应能力', tags:['高敏感','情绪管理'], status:'熔炼中',
+    contributors:['林','周','苏'], edits:12,
+    versions:[
+      {v:1, editor:'林小满', time:'3 天前', summary:'初始投放：描述困境', content:'我是高敏感人群，别人一句无心的话我能反复咀嚼一整天。想通过这个话题，把"过度内耗"炼成"深度共情力"。'},
+      {v:2, editor:'周明', time:'2 天前', summary:'补充：区分共情与情绪卷入', content:'关键区别在于：共情是理解他人，情绪卷入是被他人情绪淹没。我们需要建立边界感。'},
+      {v:3, editor:'苏念', time:'1 天前', summary:'提炼：三步转化法', content:'第一步觉察情绪来源，第二步命名情绪，第三步选择回应方式。把被动卷入变成主动共情。'}
+    ]
+  },
+  {
+    id:'t2', title:'完美主义拖延的启动解法', desc:'从"准备到最好才开始"到"先完成再完美"', tags:['拖延','完美主义','执行力'], status:'熔炼中',
+    contributors:['陈','林'], edits:8,
+    versions:[
+      {v:1, editor:'陈默', time:'5 天前', summary:'问题定义', content:'每次想开始新项目，脑子里就有个声音说"你准备得还不够"，然后就一直拖着。'},
+      {v:2, editor:'林小满', time:'3 天前', summary:'引入五分钟启动法', content:'把任务拆到五分钟能完成的颗粒度，降低启动门槛，绕过完美主义防线。'}
+    ]
+  },
+  {
+    id:'t3', title:'冒名顶替综合征的自我价值重建', desc:'把"我不够好"炼成健康的自我审视', tags:['自我价值','冒名顶替'], status:'已结晶',
+    contributors:['周','苏','陈'], edits:15,
+    versions:[
+      {v:1, editor:'周明', time:'1 周前', summary:'初始投放', content:'每次被夸奖都觉得自己是骗子，总觉得早晚会被发现我其实没那么厉害。'},
+      {v:2, editor:'苏念', time:'6 天前', summary:'区分事实与感受', content:'记录每次"被发现"的恐惧实际发生的次数——通常是零。'},
+      {v:3, editor:'陈默', time:'4 天前', summary:'成品：证据清单法', content:'建立"成就证据库"，每次自我怀疑时查阅。已入库，被 287 人收藏。'}
+    ]
+  },
+  {
+    id:'t4', title:'休息羞耻与高质量恢复力', desc:'把"一闲下来就焦虑"炼成主动恢复的能力', tags:['焦虑','休息','精力管理'], status:'熔炼中',
+    contributors:['苏'], edits:3,
+    versions:[
+      {v:1, editor:'苏念', time:'2 周前', summary:'初始投放', content:'只要不做事就觉得自己在浪费时间，休息时也在焦虑。'}
+    ]
+  },
+  {
+    id:'t5', title:'社交后的能量耗竭修复', desc:'内向者社交后的快速回血方案', tags:['内向','社交','精力'], status:'熔炼中',
+    contributors:['林','周'], edits:6,
+    versions:[
+      {v:1, editor:'林小满', time:'4 天前', summary:'初始投放', content:'每次社交后都觉得被掏空，需要很久才能恢复。'},
+      {v:2, editor:'周明', time:'2 天前', summary:'补充：独处仪式', content:'建立固定的"社交后独处仪式"，比如15分钟冥想或散步。'}
+    ]
+  },
+  {
+    id:'t6', title:'比较焦虑的锚点转换', desc:'从"和别人比"到"和昨天的自己比"', tags:['焦虑','比较','自我认知'], status:'已结晶',
+    contributors:['陈','苏'], edits:9,
+    versions:[
+      {v:1, editor:'陈默', time:'2 周前', summary:'初始投放', content:'看到同龄人进步就焦虑，刷朋友圈会陷入自我怀疑。'},
+      {v:2, editor:'苏念', time:'1 周前', summary:'锚点转换法', content:'建立个人成长基准线，只和过去的自己比较。'}
+    ]
+  }
+]));
+
+let currentTopicId = null;
+
+function renderPost(p){
+  const label = TYPE_LABELS[p.type]||'';
+  const tags = (p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  const foot = [];
+  if(p.comments) foot.push(`评论 ${p.comments}`);
+  if(p.likes) foot.push(`赞 ${p.likes}`);
+  if(p.views) foot.push(`浏览 ${p.views}`);
+  if(p.status) foot.push(`<span style="color:${p.solved?'var(--accent)':'var(--text-3)'}">${p.status}</span>`);
+  const head = p.author ? `<div class="post-head"><span class="post-author">${p.author}</span><span class="post-time">· ${p.time}</span><span style="margin-left:auto;color:var(--text-4);font-size:11px;">${label}</span></div>` : `<div class="post-head"><span class="post-time">${p.time}</span><span style="margin-left:auto;color:var(--text-4);font-size:11px;">${label}</span></div>`;
+  return `<div class="post-card" onclick="openDetail(${JSON.stringify(p).replace(/"/g,'&quot;')})"><div class="post-thumb">${p.avatar||'文'}</div><div class="post-body">${head}<div class="post-title">${p.title}</div><div class="post-excerpt">${p.excerpt}</div><div class="post-tags">${tags}</div><div class="post-foot">${foot.join(' ')}</div></div></div>`;
+}
+function renderFeed(pageId,filter='all'){
+  const c = document.getElementById('feed-'+pageId);
+  if(!c||!POSTS[pageId]) return;
+  let list = POSTS[pageId];
+  if(filter!=='all'){
+    if(pageId==='alchemy') list = list.filter(p=>(p.status||'').includes(filter));
+    else if(pageId==='question'){
+      if(filter==='hot') list = list.slice().sort((a,b)=>parseInt((b.views||'0').replace('k','000'))-parseInt((a.views||'0').replace('k','000')));
+      else list = list.filter(p=>(p.status||'').includes(filter)||(filter==='已沉淀'&&p.solved));
+    }else list = list.filter(p=>p.tags.includes(filter));
+  }
+  c.innerHTML = list.length ? list.map(renderPost).join('') : '<div class="empty-state">暂无内容</div>';
+}
+function renderInsp(filter='all'){
+  const g = document.getElementById('insp-grid');
+  if(!g) return;
+  const list = filter==='all' ? INSP_DATA : INSP_DATA.filter(i=>i.tags.includes(filter));
+  g.innerHTML = list.map(i=>`<div class="insp-card" onclick="openDetail({title:'${i.title}',excerpt:'${i.desc}',tags:[${i.tags.map(t=>`'${t}'`).join(',')}],type:'journal'})"><div class="insp-img" style="background:${i.bg};">${i.icon}</div><div class="insp-body"><h4>${i.title}</h4><p>${i.desc}</p><div class="post-tags">${i.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div></div>`).join('');
+}
+function renderBooks(filter='all'){
+  const g = document.getElementById('book-grid');
+  if(!g) return;
+  const list = filter==='all' ? BOOK_DATA : BOOK_DATA.filter(b=>b.cat===filter);
+  g.innerHTML = list.map((b,i)=>`<div class="book-card" onclick="openBookDetail(${i})"><div class="book-cover" style="background:${b.bg};"><span class="book-status">${b.statusLabel}</span><span class="book-cover-text">${b.title.charAt(0)}</span></div><div class="book-info"><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-meta">${b.cat} · ${b.readers} 人在读 · ⭐ ${b.rating}</div></div></div>`).join('');
+}
+
+// ============ Alchemy Topic Functions ============
+function renderTopics(filter='all'){
+  const g = document.getElementById('topic-grid');
+  if(!g) return;
+  let list = ALCHEMY_TOPICS;
+  if(filter!=='all') list = list.filter(t=> t.status===filter || t.tags.includes(filter));
+  g.innerHTML = list.map(t=>{
+    const statusClass = t.status==='已结晶' ? 'done' : 'active';
+    const current = t.versions[t.versions.length-1];
+    const contributorsHtml = t.contributors.slice(0,4).map(c=>`<span>${c}</span>`).join('');
+    const more = t.contributors.length>4 ? `<span>+${t.contributors.length-4}</span>` : '';
+    return `<div class="topic-card" onclick="openTopic('${t.id}')">
+      <div class="topic-top">
+        <div class="topic-title">${t.title}</div>
+        <div class="topic-status ${statusClass}">${t.status}</div>
+      </div>
+      <div class="topic-desc">${t.desc}</div>
+      <div class="topic-meta">
+        <span class="ver">V${current.v}</span>
+        <span>${t.versions.length} 次编辑</span>
+        <span>${t.contributors.length} 位贡献者</span>
+        <span>更新于 ${current.time}</span>
+        <div class="topic-contributors">${contributorsHtml}${more}</div>
+      </div>
+      <div class="topic-tags">${t.tags.map(tag=>`<span class="tag">${tag}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function openTopic(id){
+  const t = ALCHEMY_TOPICS.find(x=>x.id===id);
+  if(!t) return;
+  currentTopicId = id;
+  const statusClass = t.status==='已结晶' ? 'done' : 'active';
+  const versionsHtml = t.versions.map((v,i)=>`
+    <div class="version-item">
+      <div class="version-head">
+        <span class="version-tag">${i===0?'一编':i===1?'二编':i===2?'三编':'V'+(i+1)}</span>
+        <span class="version-editor">${v.editor}</span>
+        <span class="version-time">${v.time}</span>
+      </div>
+      <div class="version-summary">${v.summary}</div>
+      <div class="version-content">${v.content}</div>
+    </div>`).join('');
+  document.getElementById('detail-content').innerHTML = `
+    <div class="topic-top" style="margin-bottom:6px;">
+      <h3 style="font-family:var(--font-serif);font-size:24px;">${t.title}</h3>
+      <div class="topic-status ${statusClass}">${t.status}</div>
+    </div>
+    <p style="color:var(--text-3);font-size:13.5px;line-height:1.6;margin-bottom:14px;">${t.desc}</p>
+    <div class="topic-tags" style="margin-bottom:16px;">${t.tags.map(tag=>`<span class="tag">${tag}</span>`).join('')}</div>
+    <div style="display:flex;gap:14px;font-size:12px;color:var(--text-4);margin-bottom:8px;">
+      <span>当前版本 V${t.versions.length}</span>
+      <span>${t.versions.length} 次编辑</span>
+      <span>${t.contributors.length} 位贡献者</span>
+    </div>
+    <div class="topic-actions">
+      <button class="btn btn-primary" onclick="openVersionEdit()">加入共创</button>
+      <button class="btn btn-secondary" onclick="forkTopic('${t.id}')">分叉此话题</button>
+    </div>
+    <div style="font-family:var(--font-serif);font-size:18px;font-weight:600;margin:22px 0 12px;">版本历史</div>
+    <div class="version-timeline">${versionsHtml}</div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+
+function openTopicCreate(){
+  document.getElementById('detail-content').innerHTML = `
+    <h3 style="font-family:var(--font-serif);font-size:24px;margin-bottom:8px;">发起成长话题</h3>
+    <p style="color:var(--text-3);font-size:13px;margin-bottom:18px;">围绕一个具体的成长困境创建话题，邀请社区共同编辑迭代。</p>
+    <div class="edit-form">
+      <div class="form-group"><label class="form-label">话题标题 *</label><input class="form-input" id="newTopicTitle" placeholder="如：如何克服社交后的能量耗竭"></div>
+      <div class="form-group"><label class="form-label">话题描述 *</label><textarea class="form-textarea" id="newTopicDesc" placeholder="简要描述这个话题要解决的问题"></textarea></div>
+      <div class="form-group"><label class="form-label">标签（用逗号分隔）</label><input class="form-input" id="newTopicTags" placeholder="如：内向, 社交, 精力"></div>
+      <div class="form-group"><label class="form-label">初始版本内容（一编）*</label><textarea class="form-textarea" id="newTopicContent" placeholder="详细描述你的困境或想法"></textarea></div>
+      <button class="btn btn-primary" onclick="createTopic()">创建话题</button>
+    </div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+
+function createTopic(){
+  const title = document.getElementById('newTopicTitle').value.trim();
+  const desc = document.getElementById('newTopicDesc').value.trim();
+  const tags = document.getElementById('newTopicTags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const content = document.getElementById('newTopicContent').value.trim();
+  if(!title||!desc||!content){alert('请填写必填项');return;}
+  const newTopic = {
+    id:'t'+Date.now(), title, desc, tags:tags.length?tags:['成长'], status:'熔炼中',
+    contributors:['我'], edits:1,
+    versions:[{v:1, editor:'我', time:'刚刚', summary:'初始投放', content}]
+  };
+  ALCHEMY_TOPICS.unshift(newTopic);
+  localStorage.setItem('gt_topics_v1', JSON.stringify(ALCHEMY_TOPICS));
+  closeDetail();
+  renderTopics();
+  go('alchemy');
+}
+
+function openVersionEdit(){
+  const t = ALCHEMY_TOPICS.find(x=>x.id===currentTopicId);
+  if(!t) return;
+  const nextV = t.versions.length+1;
+  const nextLabel = nextV===2?'二编':nextV===3?'三编':'V'+nextV;
+  document.getElementById('detail-content').innerHTML = `
+    <h3 style="font-family:var(--font-serif);font-size:22px;margin-bottom:6px;">加入共创：${t.title}</h3>
+    <p style="color:var(--text-3);font-size:13px;margin-bottom:16px;">基于 V${t.versions.length} 创建 ${nextLabel}，你的修改将成为话题的新版本。</p>
+    <div class="edit-form">
+      <div class="form-group"><label class="form-label">变更说明 *</label><input class="form-input" id="editSummary" placeholder="一句话说明你的修改"></div>
+      <div class="form-group"><label class="form-label">版本内容 *</label><textarea id="editContent" placeholder="在前一版基础上补充、修正或提炼...">${t.versions[t.versions.length-1].content}</textarea></div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-primary" onclick="submitVersion()">提交 ${nextLabel}</button>
+        <button class="btn btn-secondary" onclick="openTopic('${t.id}')">返回话题</button>
+      </div>
+    </div>`;
+}
+
+function submitVersion(){
+  const t = ALCHEMY_TOPICS.find(x=>x.id===currentTopicId);
+  if(!t) return;
+  const summary = document.getElementById('editSummary').value.trim();
+  const content = document.getElementById('editContent').value.trim();
+  if(!summary||!content){alert('请填写变更说明和内容');return;}
+  t.versions.push({v:t.versions.length+1, editor:'我', time:'刚刚', summary, content});
+  t.edits = (t.edits||0)+1;
+  if(!t.contributors.includes('我')) t.contributors.push('我');
+  localStorage.setItem('gt_topics_v1', JSON.stringify(ALCHEMY_TOPICS));
+  openTopic(t.id);
+}
+
+function forkTopic(id){
+  const t = ALCHEMY_TOPICS.find(x=>x.id===id);
+  if(!t) return;
+  const forked = JSON.parse(JSON.stringify(t));
+  forked.id = 't'+Date.now();
+  forked.title = t.title + '（分叉）';
+  forked.contributors = ['我'];
+  forked.versions = [{v:1, editor:'我', time:'刚刚', summary:'从原话题分叉', content:t.versions[t.versions.length-1].content}];
+  ALCHEMY_TOPICS.unshift(forked);
+  localStorage.setItem('gt_topics_v1', JSON.stringify(ALCHEMY_TOPICS));
+  closeDetail();
+  renderTopics();
+  alert('已创建分叉话题，你可以独立编辑它。');
+}
+
+// ============ AI Knowledge Base ============
+const AI_KNOWLEDGE = [
+  {q:'如何坚持共读打卡？',a:'根据 89 位营友的经验，最有效的方法是：把打卡绑定到已有习惯上（如早餐后），设置最低完成标准（读 1 页也算），并加入小组互相提醒。',refs:['两次法则治好了我的完美主义','环境设计让好习惯显而易见']},
+  {q:'读不进去怎么办？',a:'经验贴建议：先读目录和结论，带着问题去读；每天只设定 25 分钟专注阅读；如果一本书连续 3 天读不进去，允许自己换书。',refs:['身份认同比目标更重要','五分钟启动法']},
+  {q:'如何做读书笔记？',a:'社区沉淀的方法：三栏法（原文+想法+行动）、子弹笔记法、卡片盒笔记法。关键是记录"对你有启发的点"，而不是摘抄全文。',refs:['极简风周计划排版','读书笔记子弹法']},
+  {q:'共读和独自读书的区别？',a:'共读的核心价值是"输出倒逼输入"和"多元视角"。营友反馈：同样一本书，自己读只能看到 30%，共读讨论能看到 70% 以上。',refs:['环境设计让好习惯显而易见','身份认同比目标更重要']},
+  {q:'怎么选共读书目？',a:'社区投票机制：每月发布候选书单，成员投票选出下期共读书。选书标准：实操性强、适合讨论、页数适中（200-400页）。',refs:['原子习惯共读 Day 7','认知觉醒共读营']},
+];
+
+function openAIKnowledge(){
+  document.getElementById('detail-content').innerHTML = `
+    <h3 style="font-family:var(--font-serif);font-size:24px;margin-bottom:6px;">AI 共读知识库</h3>
+    <p style="color:var(--text-3);font-size:13px;margin-bottom:18px;">基于社区 156 篇共读经验贴训练，输入问题获取参考答案。</p>
+    <div class="search-input-wrap" style="margin-bottom:14px;">
+      <span>🔍</span>
+      <input type="text" id="aiQuestion" placeholder="如：如何坚持共读打卡？" onkeydown="if(event.key==='Enter') askAI()">
+      <button class="btn btn-primary btn-sm" onclick="askAI()">提问</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
+      ${AI_KNOWLEDGE.map(k=>`<span class="tag" style="cursor:pointer;" onclick="document.getElementById('aiQuestion').value='${k.q}';askAI()">${k.q}</span>`).join('')}
+    </div>
+    <div id="aiAnswer"></div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+
+function askAI(){
+  const q = document.getElementById('aiQuestion').value.trim().toLowerCase();
+  const box = document.getElementById('aiAnswer');
+  if(!q){box.innerHTML='';return;}
+  const hit = AI_KNOWLEDGE.find(k=> k.q.toLowerCase().includes(q) || q.includes(k.q.toLowerCase().slice(0,4)) );
+  const answer = hit ? hit.a : '这是一个很好的问题。基于现有经验贴，建议先参考相关共读笔记，或在问题共创区发起讨论，社区成员会一起补充答案。';
+  const refs = hit ? hit.refs : [];
+  const related = POSTS.camp.filter(p=> refs.some(r=>p.title.includes(r)) || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) ).slice(0,3);
+  box.innerHTML = `
+    <div style="background:var(--white);border-radius:var(--r-sm);padding:18px;box-shadow:var(--shadow);margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--text-3);margin-bottom:8px;">AI 回答</div>
+      <div style="font-size:14px;line-height:1.7;color:var(--text-2);">${answer}</div>
+    </div>
+    ${related.length?`<div style="font-size:13px;font-weight:600;margin-bottom:10px;">参考经验贴</div>${related.map(p=>`<div class="post-card" style="margin-bottom:10px;" onclick="closeDetail();openDetail(${JSON.stringify(p).replace(/"/g,'&quot;')})"><div class="post-thumb">${p.avatar||'文'}</div><div class="post-body"><div class="post-title">${p.title}</div><div class="post-excerpt">${p.excerpt}</div></div></div>`).join('')}`:''}`;
+}
+function openBookDetail(i){
+  const b = BOOK_DATA[i];
+  document.getElementById('detail-content').innerHTML = `<div style="display:flex;gap:16px;margin-bottom:18px;"><div style="width:64px;height:88px;border-radius:12px;background:${b.bg};display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:600;color:var(--text-2);">${b.title.charAt(0)}</div><div><div style="font-size:20px;font-weight:600;font-family:var(--font-serif);">${b.title}</div><div style="font-size:13px;color:var(--text-3);margin-top:4px;">${b.author}</div><div class="post-tags" style="margin-top:8px;"><span class="tag">${b.cat}</span></div></div></div><p>《${b.title}》已收录在社区图书角。</p><div class="post-foot" style="margin-top:16px;"><span onclick="go('camp')">参与共读</span><span onclick="openCompose()">写笔记</span></div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+function submitBook(e){
+  e.preventDefault();
+  const f = e.target;
+  if(!f.title.value.trim()||!f.author.value.trim()||!f.category.value||!f.reason.value.trim()){alert('请填写必填项');return;}
+  const newBook = {bg:MORANDI[Math.floor(Math.random()*MORANDI.length)],title:f.title.value,author:f.author.value,statusLabel:'新上传',cat:f.category.value,readers:1,rating:0};
+  BOOK_DATA.unshift(newBook);
+  localStorage.setItem('gt_books_v3', JSON.stringify(BOOK_DATA));
+  renderBooks();
+  document.getElementById('successMsg').textContent = '《'+newBook.title+'》已加入书库。';
+  document.getElementById('uploadSuccess').style.display='block';
+  f.reset();
+  setTimeout(()=>document.getElementById('uploadSuccess').style.display='none',4000);
+}
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-'+n).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(l=>l.classList.toggle('active',l.dataset.p===n));
+  document.querySelectorAll('.tabbar-item').forEach(t=>t.classList.toggle('active',t.dataset.p===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n==='journal') renderInsp();
+  else if(n==='books') renderBooks();
+  else if(n==='alchemy') renderTopics();
+  else renderFeed(n);
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem('gt_theme_v1',next);}catch(e){}
+}
+function openSearch(){document.getElementById('overlay-search').classList.add('show');setTimeout(()=>document.getElementById('searchInput').focus(),100);}
+function closeSearch(){document.getElementById('overlay-search').classList.remove('show');}
+function quickSearch(q){document.getElementById('searchInput').value=q;doSearch();}
+function doSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const box = document.getElementById('searchResults');
+  if(!q){box.innerHTML='';return;}
+  const results = [];
+  Object.entries(POSTS).forEach(([page,list])=>list.forEach(p=>{if((p.title+p.excerpt+p.tags.join(' ')).toLowerCase().includes(q))results.push({type:'post',item:p});}));
+  BOOK_DATA.forEach((b,i)=>{if((b.title+b.author+b.cat).toLowerCase().includes(q))results.push({type:'book',index:i,item:b});});
+  INSP_DATA.forEach((j,i)=>{if((j.title+j.desc+j.tags.join(' ')).toLowerCase().includes(q))results.push({type:'journal',index:i,item:j});});
+  box.innerHTML = results.length ? results.slice(0,8).map(r=>{
+    if(r.type==='post') return `<div class="post-card" onclick="openDetail(${JSON.stringify(r.item).replace(/"/g,'&quot;')});closeSearch();"><div class="post-thumb">${r.item.avatar||'文'}</div><div class="post-body"><div class="post-head"><span style="color:var(--text-4);font-size:11px;">${TYPE_LABELS[r.item.type]}</span></div><div class="post-title">${r.item.title}</div><div class="post-excerpt">${r.item.excerpt}</div></div></div>`;
+    if(r.type==='book') return `<div class="post-card" onclick="openBookDetail(${r.index});closeSearch();"><div class="post-thumb" style="font-size:22px;font-weight:600;color:var(--text-2);">${r.item.title.charAt(0)}</div><div class="post-body"><div class="post-title">${r.item.title}</div><div class="post-excerpt">${r.item.author} · ${r.item.cat}</div></div></div>`;
+    return `<div class="post-card" onclick="closeSearch();"><div class="post-thumb" style="font-size:22px;">${r.item.icon}</div><div class="post-body"><div class="post-title">${r.item.title}</div><div class="post-excerpt">${r.item.desc}</div></div></div>`;
+  }).join('') : '<div class="empty-state">未找到相关内容</div>';
+}
+function openDetail(p){
+  if(typeof p==='string') p=JSON.parse(p.replace(/&quot;/g,'"'));
+  const label = TYPE_LABELS[p.type]||'';
+  const head = p.author ? `<div class="post-head"><span class="post-author">${p.author}</span><span class="post-time">· ${p.time}</span><span style="margin-left:auto;color:var(--text-4);font-size:11px;">${label}</span></div>` : `<div class="post-head"><span class="post-time">${p.time}</span><span style="margin-left:auto;color:var(--text-4);font-size:11px;">${label}</span></div>`;
+  const tags = (p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  const foot = [];
+  if(p.comments) foot.push(`${p.comments} 评论`);
+  if(p.likes) foot.push(`${p.likes} 赞`);
+  if(p.bookmarks) foot.push(`${p.bookmarks} 收藏`);
+  document.getElementById('detail-content').innerHTML = `${head}<h3 style="font-family:var(--font-serif);font-size:22px;margin:14px 0;">${p.title}</h3><p style="color:var(--text-2);line-height:1.7;">${p.excerpt}</p><p style="color:var(--text-3);line-height:1.7;margin-top:10px;">这里是详细内容展开区。实际产品中会展示完整帖子、图片、引用和评论。</p><div class="post-tags" style="margin-top:16px;">${tags}</div><div class="post-foot" style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px;">${foot.join(' ')}</div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+function closeDetail(){document.getElementById('overlay-detail').classList.remove('show');}
+function openCompose(){document.getElementById('overlay-compose').classList.add('show');}
+function closeCompose(){document.getElementById('overlay-compose').classList.remove('show');}
+function openCompassDetail(key){
+  const d = COMPASS_DETAIL[key];
+  document.getElementById('detail-content').innerHTML = `<div style="font-size:36px;margin-bottom:10px;">${d.icon}</div><h3 style="font-family:var(--font-serif);font-size:24px;margin-bottom:8px;">${d.title}</h3><p style="color:var(--text-2);line-height:1.7;margin-bottom:18px;">${d.desc}</p><div style="font-weight:600;margin-bottom:10px;">推荐实践</div><ul style="padding-left:18px;color:var(--text-2);line-height:1.8;">${d.practices.map(x=>`<li>${x}</li>`).join('')}</ul><div class="post-foot" style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px;"><span onclick="go('camp')">共读入口</span><span onclick="go('alchemy')">炼金入口</span></div>`;
+  document.getElementById('overlay-detail').classList.add('show');
+}
+
+// Tabs binding
+document.querySelectorAll('.tabs').forEach(tabs=>{
+  const group = tabs.closest('.page').id.replace('p-','');
+  tabs.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click',function(){
+      tabs.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      this.classList.add('active');
+      const f = FILTER_MAP[this.textContent.trim()] || this.textContent.trim();
+      if(group==='journal') renderInsp(f);
+      else if(group==='books') renderBooks(f);
+      else if(group==='alchemy') renderTopics(f);
+      else renderFeed(group,f);
+    });
+  });
+});
+
+// Init
+try{
+  const t = localStorage.getItem('gt_theme_v1');
+  if(t==='dark') document.documentElement.setAttribute('data-theme','dark');
+}catch(e){}
+renderFeed('home'); renderFeed('camp'); renderFeed('question'); renderFeed('profile'); renderInsp(); renderBooks(); renderTopics();
+</script>
+</body>
+</html>
